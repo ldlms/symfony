@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+
+
+{% if nbr1 is defined and nbr1 == 0 or nbr2 is defined and nbr2 == 0 %}
+<p>il y a un zero</p>
+{% elseif nbr1 > nbr2 %}
+<p>Le chiffre le plus grand est {{nbr1}}</p>
+{% elseif nbr2 > nbr1 %}
+<p>Le chiffre le plus grand est {{nbr2}}</p>
+{% endif %}
+</div>
+{% endblock %}

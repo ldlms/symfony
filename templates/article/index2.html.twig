@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+{% for row in filmes %}
+<p>{{row.titre}}</p>
+<p>{{row.contenu}}</p>
+<p>{{row.duree}}</p>
+{% endfor %}
+{% endblock %}

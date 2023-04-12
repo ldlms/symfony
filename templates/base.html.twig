@@ -10,10 +10,11 @@
         {% endblock %}
 
         {% block javascripts %}
-        <link href="{{ asset('asset/style/script/bootstrap.min.js') }}">
+        <script src="{{ asset('asset/style/script/bootstrap.min.js') }}" defer></script>
         {% endblock %}
     </head>
     <body>
+        {% include '/header.html.twig' %}
         {% block body %}
         {% endblock %}
     </body>

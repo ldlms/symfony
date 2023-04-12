@@ -15,4 +15,12 @@ class ArticleController extends AbstractController
             'controller_name' => 'ArticleController',
         ]);
     }
+
+    #[Route('/article/all', name: 'app_article_all')]
+    public function showArticle():Response{
+        $article = [['titre'=>'nouveau film','contenu' =>'contenu du nouveau film','duree'=>120],['titre'=> 'Mario', 'contenu' => 'film animation', 'duree'=> 90]];     
+        return $this->render('article/index2.html.twig', [
+            'filmes'=> $article,
+        ]);
+    }
 }
