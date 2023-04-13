@@ -3,9 +3,11 @@
 {% block title %}Hello ArticleController!{% endblock %}
 
 {% block body %}
-{% for row in filmes %}
-<p>{{row.titre}}</p>
-<p>{{row.contenu}}</p>
-<p>{{row.duree}}</p>
+{% for article in liste %}
+<p>{{article.titre}}</p>
+<p>{{article.id}}</p>
+<p>{{article.date | date('y-m-d')}}</p>
+<p>{{article.user.nom | upper}} {{article.user.prenom}}</p>
+{# peut etre penser a tester la methode magique #}
 {% endfor %}
 {% endblock %}
