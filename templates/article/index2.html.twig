@@ -3,11 +3,24 @@
 {% block title %}Hello ArticleController!{% endblock %}
 
 {% block body %}
-{% for article in liste %}
-<p>{{article.titre}}</p>
+{#{% for article in liste %}
+{# <p>{{article.titre}}</p>
 <p>{{article.id}}</p>
 <p>{{article.date | date('y-m-d')}}</p>
 <p>{{article.user.nom | upper}} {{article.user.prenom}}</p>
 {# peut etre penser a tester la methode magique #}
+{#{% for cat in article.categorie %}
+<p>{{ cat.nom }}</p>
+{% endfor %}
+{% endfor %} #}
+
+{% for article in liste %}
+    <div class="bg-primary p-2 text-white border border-white"><a class="text-white" href="{{ path('app_article_id',{'id': article.id}) }}">{{ article.id }}</a></div>
+    <div class="bg-primary p-2 text-white border border-white">{{ article.titre }}
+    {{ article.contenu }}
+    {{ article.date | date('y-m-d')}}
+    </div>
+    <hr>
 {% endfor %}
 {% endblock %}
+
