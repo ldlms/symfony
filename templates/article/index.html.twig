@@ -1,18 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}Article{% endblock %}
 
 {% block body %}
-
-<div class="bg-primary p-2 text-white border border-white">
-<p>{{ article.titre }}</p>
-<p>{{ article.contenu }}</p>
-<p>{{ article.date | date('y-m-d') }}</p>
-<p>{{ article.user.prenom }} {{ article.user.nom }}</p>
-{% for cat in article.categorie %}
-{{ cat.nom }}
-{% endfor %}
-</div>
-
 
 {% endblock %}
