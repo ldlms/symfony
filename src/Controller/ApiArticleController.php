@@ -10,8 +10,10 @@ use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
-use DateTimeImmutable;
+use App\Repository\CategorieRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\Serializer\SerializerInterface;
 
 
@@ -46,20 +48,25 @@ class ApiArticleController extends AbstractController
     }
 
     #[Route('/api/article/add',name:'app_api_article_add',methods:'POST')]
-    public function articleAdd(ArticleRepository $repo,Request $request, SerializerInterface $serialize, EntityManagerInterface $em):Response{
+    public function articleAdd(ArticleRepository $repoA, CategorieRepository $repoC, UserRepository $repoU, Request $request, SerializerInterface $serialize, EntityManagerInterface $em):Response{
         $json = $request->getContent();
         $data = $serialize->decode($json,'json');
-        
+
+        $user = $repoU->findOneBy(['email'=>$data['user']['email']]);
+
         $article = new Article();
-        $cat = new Categorie();
-        $user = new User();
         $article->setTitre($data['titre']);
         $article->setContenu($data['contenu']);
-        $article->setDate(new DateTimeImmutable($data['date']));
-        $cat->setNom($data['nom']);
-        $user->setEmail($data['email']);
+        $article->setDate(new \DateTimeImmutable($data['date']));
+        $article->setUser($user);
+        
+        foreach($data['categories'] as $cat){
+            $catego = $repoC->findOneBy(['nom'=>$cat['nom']]);
+            $article->addCategorie($catego);
+        }
+        
 
-        $recup = $repo->findOneBy(['titre'=>$data['titre'],'date'=>$article->getDate()]);
+        $recup = $repoA->findOneBy(['titre'=>$data['titre'],'date'=>$article->getDate()]);
         if($recup){
             return $this->json(['erreur'=>'L\'article existe déja'], 206, ['Content-Type'=>'application/json',
             'Access-Control-Allow-Origin'=> 'localhost',
