@@ -4,8 +4,8 @@
 
 {% block body %}
 
-<div class="bg-primary p-2 text-white border border-white">
-<p>{{ article.titre }}</p>
+<div class="bg-primary p-2 text-white border border-white" style="max-width: 20rem;">
+<p class="card-header">{{ article.titre }}</p>
 <p>{{ article.contenu }}</p>
 <p>{{ article.date | date('y-m-d') }}</p>
 <p>{{ article.user.prenom }} {{ article.user.nom }}</p>
