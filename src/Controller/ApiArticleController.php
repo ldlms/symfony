@@ -25,11 +25,11 @@ class ApiArticleController extends AbstractController
         $article = $repo->findAll();
         if(!$article){
             return $this->json(['erreur'=>'Il n\'y a pas d\'article'], 206, ['Content-Type'=>'application/json',
-            'Access-Control-Allow-Origin'=> 'localhost',
+            'Access-Control-Allow-Origin'=> '*',
             'Access-Control-Allow-Methods'=> 'GET']);
         }
         return $this->json($article,200,['Content-Type'=>'application/json',
-        'Access-Control-Allow-Origin'=> 'localhost',
+        'Access-Control-Allow-Origin'=> '*',
         'Access-Control-Allow-Methods'=>'GET'],['groups'=>'article:readAll']);
         }
 
@@ -93,7 +93,7 @@ class ApiArticleController extends AbstractController
 
         if(!$article){
             return $this->json(['erreur'=>'cet article n\'existe pas'], 206, ['Content-Type'=>'application/json',
-            'Access-Control-Allow-Origin'=> 'localhost',
+            'Access-Control-Allow-Origin'=> '*',
             'Access-Control-Allow-Methods'=> 'GET']);
         }
 
@@ -101,7 +101,7 @@ class ApiArticleController extends AbstractController
         $em->flush();
         // ON ARRIVE ICI A ACC2DER AU TITRE DE ARTICLE? MALGRES LE FAIT QUIL SOIT FLUSH? CAR LA VARIABLE EXISTE ENCORE
         return $this->json(['erreur'=>'L\'article '.$article->getTitre().' a été bien suprimé'],200,['Content-Type'=>'application/json',
-        'Access-Control-Allow-Origin'=> 'localhost',
+        'Access-Control-Allow-Origin'=> '*',
         'Access-Control-Allow-Methods'=> 'GET'],[]);
 
     }

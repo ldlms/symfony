@@ -95,4 +95,11 @@ class ArticleController extends AbstractController
             'msg'=> $msg,
         ]);
     }
+
+    #[Route('/article', name: 'app_article')]
+    public function index(): Response
+    {   
+        return $this->render('article/article_api.html.twig', [    
+        ]);
+    }
 }
