@@ -35,6 +35,13 @@ class ContactController extends AbstractController
         
         if($form->isSubmitted() AND $form->isValid()){
 
+            $contact->setContenu(Utils::cleanInputStatic($request->request->all('contact')['contenu']));
+            $contact->setObjet(Utils::cleanInputStatic($request->request->all('contact')['objet']));
+            $contact->setDate(new \DateTimeImmutable(Utils::cleanInputStatic($request->request->all('contact')['date'])));
+            $contact->setNom(Utils::cleanInputStatic($request->request->all('contact')['nom']));
+            $contact->setPrenom(Utils::cleanInputStatic($request->request->all('contact')['prenom']));
+            $contact->setMail(Utils::cleanInputStatic($request->request->all('contact')['mail']));
+
             $recup = $repo->findOneBy(['nom'=>$contact->getNom()]);
             
             if(!$recup){
@@ -49,7 +56,7 @@ class ContactController extends AbstractController
             }
         }
     
-        return $this->render('contact/contactAdd.html.twig', [
+        return $this->render('contact/index.html.twig', [
             'form'=> $form->createView(),
             'msg' => $msg,
         ]);

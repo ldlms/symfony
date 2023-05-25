@@ -6,7 +6,11 @@ use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use symfony\component\Form\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 class ContactType extends AbstractType
@@ -14,12 +18,15 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('objet')
-            ->add('date')
-            ->add('contenu')
-            ->add('mail')
-            ->add('nom')
-            ->add('prenom')
+            ->add('objet',TextType::class)
+            ->add('date',DateType::class,
+            [
+                'widget' => 'single_text',
+            ])
+            ->add('contenu',TextType::class)
+            ->add('mail',TextType::class)
+            ->add('nom',TextType::class)
+            ->add('prenom',TextType::class)
             ->add('Ajouter', SubmitType::class)
         ;
     }
