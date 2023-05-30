@@ -8,6 +8,7 @@ parameters:
     auteur: '%env(AUTHEUR)%'
     login: '%env(LOGIN)%'
     mdp: '%env(MDP)%'
+    token: '%env(TOKEN)%'
 #permet de ne pas révéler les  valeurs sensibles
 services:
     # default configuration for services in *this* file

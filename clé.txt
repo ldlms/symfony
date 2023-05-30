@@ -1,0 +1,11 @@
+-----BEGIN PGP MESSAGE-----
+Comment: https://openpgpjs.org
+Comment: http://vscode-openpgp.ugosan.org
+
+wV4Dav7LEMrkmn8SAQdAUr4a+lJActRXn+DyFqLl76Zid6NMKJjTho2JBS8j
+sgYw3RvFh0bjFdoLudCVqSHWBJgKjvl7VgECxG5GE7Yb/bCUc5MYsVySKnOY
+ZFPHIsXN0lcBYukwH238Ckns9sHWLmn4s0eRlQgqqcoy3AYe6ffl3uqybS+P
+GWwoo1M4gusINBtWpVM6W7JLzmD1VtH/5EClK9cmPsKJeYwroDEYtMdTihe2
+jaqBqeU=
+=gs7s
+-----END PGP MESSAGE-----
