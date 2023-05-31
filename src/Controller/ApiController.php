@@ -11,6 +11,7 @@ use App\Service\ApiRegister;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\Serializer\SerializerInterface;
 
   class ApiController extends AbstractController
   { 
@@ -32,11 +33,25 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
     #[Route('/api/register', name:'app_api_register')]
     public function getToken(Request $request, UserRepository $repo,
-        UserPasswordHasherInterface $hash, ApiRegister $apiRegister){
-        //récupération du paramètre email
-        $mail = $request->query->get('email');
-        //récupération du paramètre password
-        $password = $request->query->get('password');
+        UserPasswordHasherInterface $hash, ApiRegister $apiRegister,
+        SerializerInterface $serialize){
+        //récupérer le json
+        $json = $request->getContent();
+        //test si on n'à pas de json
+        if(!$json){
+            //renvoyer un json
+            return $this->json(['erreur'=>'Le Json est vide ou n\'existe pas'], 400, 
+            ['Content-Type'=>'application/json',
+            'Access-Control-Allow-Origin'=> 'localhost',
+            'Access-Control-Allow-Methods'=> 'GET'],[]);
+        }
+        //transformer le json en tableau
+        $data = $serialize->decode($json, 'json');
+       
+        //récupération du mail et du password
+        $mail = $data['email'];
+        $password = $data['password']; 
+
         //test si le paramétre mail n'est pas saisi
         if(!$mail OR !$password){
             return $this->json(['Error'=>'informations absentes'], 400,['Content-Type'=>'application/json',
@@ -74,5 +89,10 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
             'Access-Control-Allow-Methods'=> 'GET']);
         }
     }
-}
+
+    #[Route('api/localToken', name:'app_api_local_token')]
+    public function localToken():Response{
+        return $this->render('api/local.html.twig');
+    }
+  }
 ?>
